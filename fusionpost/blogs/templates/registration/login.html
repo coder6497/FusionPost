@@ -4,6 +4,7 @@
     {% if form.errors %}
         <p>Неверный логин/пароль</p>
     {% endif %}
+    <h1>Войти</h1>
     <form method="post" action="{% url "blogs:login" %}">
         {% csrf_token %}
         {{form}}
