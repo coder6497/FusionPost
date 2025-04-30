@@ -1,7 +1,8 @@
 {% extends "base.html" %}
-{% block title %}Вы вышли{% endblock %}
+
+{% block title %}Добро пожаловать{% endblock %}
 
 {% block body %}
-    <h1>Вы успешно зарегистрированны</h1>
-    <a href="{% url "blogs:login" %}">На страницу входа</a>
+    <h1>Добро пожаловать {{ request.user }}</h1>
+    <a href="{% url "blogs:dashboard" %}">В Панель управления</a>
 {% endblock %}

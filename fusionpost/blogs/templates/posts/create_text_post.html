@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Создать текстовый пост{% endblock %}
+
+{% block body %}
+    <h1>Создать текстовый пост</h1>
+    <form method="post" action="{% url "blogs:create_text_post" %}">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Создать">
+    </form>
+{% endblock %}

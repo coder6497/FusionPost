@@ -3,5 +3,8 @@
 {% block title %}Добро пожаловать{% endblock %}
 
 {% block body %}
-    <h1>Добро пожаловать {{request.user}}</h1>
+    <h1>Добро пожаловать {{request.user}} Выберите действие</h1>
+    <a href="{% url "blogs:create_text_post" %}">Создать текстовый пост</a>
+    <br>
+    <a href="{% url "blogs:post_list" %}">Список постов</a>
 {% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <h1>Список постов</h1>
+    <br><br>
+    {% for post in text_posts %}
+        <h4><a href="{% url "blogs:text_post_detail" post.id %}">{{ post.title }}</a></h4>
+        {{ post.body|truncatewords:30 }}
+    {% endfor %}
+{% endblock %}
