@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from .forms import RegistrationForm, TextPostForm
@@ -9,10 +9,10 @@ def index(request):
 
 def register(request):
     if request.method == "POST":
-        form = RegistrationForm(request.POST)
+        form = RegistrationForm(request.POST, request.FILES)
         if form.is_valid():
             login(request, form.save())
-            return render(request, 'registration/register_done.html')
+            return redirect('blogs:post_list')
     else:
         form = RegistrationForm()
     return render(request, 'registration/register.html', {'form': form})
@@ -29,7 +29,7 @@ def create_text_post(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return render(request, "posts/text_post_success.html")
+            return redirect('blogs:post_list')
     else:
         form = TextPostForm()
     return render(request, "posts/create_text_post.html", {'form': form})
@@ -37,6 +37,12 @@ def create_text_post(request):
 @login_required
 def post_list(request):
     return render(request, 'posts/post_list.html', {"text_posts": TextPost.objects.filter(author=request.user).all()})
+
+
+@login_required
+def delete_post(request, post_id):
+    TextPost.objects.filter(id=post_id).delete()
+    return redirect('blogs:post_list')
 
 
 @login_required

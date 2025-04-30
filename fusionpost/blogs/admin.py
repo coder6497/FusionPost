@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TextPost
+from .models import TextPost, CustomUser
 
 
 @admin.register(TextPost)
@@ -9,3 +9,8 @@ class TextPostAdmin(admin.ModelAdmin):
     date_hierarchy = 'publish'
     ordering = ['publish']
     show_facets = admin.ShowFacets.ALWAYS
+
+
+@admin.register(CustomUser)
+class CustomModelAdmin(admin.ModelAdmin):
+    list_display =  ['username', 'email', 'phone']

@@ -3,7 +3,7 @@
 
 {% block body %}
     <h1>Регистрация</h1>
-    <form method="post" action="{% url "blogs:register" %}">
+    <form method="post" enctype="multipart/form-data" action="{% url "blogs:register" %}">
         {% csrf_token %}
         {{form}}
         <input type="submit" value="Зарегестрироваться">
