@@ -1,11 +1,13 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block title %}Регистрация{% endblock %}
 
 {% block body %}
     <h1>Регистрация</h1>
+    <br><br>
     <form method="post" enctype="multipart/form-data" action="{% url "blogs:register" %}">
         {% csrf_token %}
-        {{form}}
-        <input type="submit" value="Зарегестрироваться">
+        {{ form|crispy }}
+        <input class="btn btn-success" type="submit" value="Зарегестрироваться">
     </form>
 {% endblock %}

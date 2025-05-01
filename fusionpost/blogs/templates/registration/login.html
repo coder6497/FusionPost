@@ -1,13 +1,15 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block title %}Логин{% endblock %}
 {% block body %}
     {% if form.errors %}
         <p>Неверный логин/пароль</p>
     {% endif %}
     <h1>Войти</h1>
+    <br><br>
     <form method="post" action="{% url "blogs:login" %}">
         {% csrf_token %}
-        {{form}}
-        <input type="submit" value="Войти">
+        {{form|crispy}}
+        <input class="btn btn-success" type="submit" value="Войти">
     </form>
 {% endblock %}

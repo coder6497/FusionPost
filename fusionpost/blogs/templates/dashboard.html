@@ -4,5 +4,8 @@
 
 {% block body %}
     <h1>Добро пожаловать {{request.user}} Выберите действие</h1>
-    <a href="{% url "blogs:post_list" %}">Список постов</a>
+    <br><br>
+    <div class="list-group">
+        <a href="{% url "blogs:post_list" %}" class="list-group-item list-group-item-action list-group-item-info">Список текстовых постов</a>
+    </div>
 {% endblock %}

@@ -4,10 +4,18 @@
 
 {% block body %}
     <h1>Список постов</h1>
-    <a href="{% url "blogs:create_text_post" %}">Создать текстовый пост</a>
-    {% for post in text_posts %}
-        <h4><a href="{% url "blogs:text_post_detail" post.id %}">{{ post.title }}</a></h4>
-        <pre>{{ post.body|truncatewords:30 }}</pre><a href="{% url "blogs:delete_post" post.id %}">Удалить</a>
-        <p>------------------------------------------------------------------------------------------------------------</p>
-    {% endfor %}
+    <br><br>
+    <a class="btn btn-outline-primary" href="{% url "blogs:create_text_post" %}">Создать текстовый пост</a>
+    <br><br>
+    <div class="list-group">
+        {% for post in text_posts %}
+            <a href="{% url "blogs:text_post_detail" post.id %}" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ post.title }}</h5>
+                <small class="text-body-secondary">{{ post.publish }}</small>
+            </div>
+            <p class="mb-1">{{ post.body|truncatewords:30 }}</p>
+            </a>
+        {% endfor %}
+      </div>
 {% endblock %}
