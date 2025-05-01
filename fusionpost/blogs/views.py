@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from .forms import RegistrationForm, TextPostForm
-from .models import TextPost
+from .models import TextPost, CustomUser
 
 def index(request):
     return render(request, "index.html")
@@ -44,7 +44,10 @@ def delete_post(request, post_id):
     TextPost.objects.filter(id=post_id).delete()
     return redirect('blogs:post_list')
 
-
 @login_required
 def text_post_detail(request, text_post_id):
     return render(request, 'posts/text_post_detail.html', {"text_post": TextPost.objects.get(id=text_post_id)})
+
+@login_required
+def about_user(request):
+    return render(request, 'about_user.html', {"user": CustomUser.objects.get(id=request.user.id)})

@@ -13,5 +13,6 @@ urlpatterns = [
     path('create_text_post/', views.create_text_post, name='create_text_post'),
     path('post_list/', views.post_list, name='post_list'),
     path('text_post_detail/<int:text_post_id>', views.text_post_detail, name='text_post_detail'),
-    path('delete_post/<int:post_id>', views.delete_post, name='delete_post')
+    path('delete_post/<int:post_id>', views.delete_post, name='delete_post'),
+    path('about_user/', views.about_user, name='about_user')
 ]

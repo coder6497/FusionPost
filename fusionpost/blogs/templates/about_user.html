@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}О вас{% endblock %}
+
+{% block body %}
+    <h1>О вас {{user.username}}</h1>
+    <ul>
+        <li>Имя: {{user.username}}</li>
+        <li>Почта: {{user.email}}</li>
+        <li>Номер телефона: {{user.phone}}</li>
+    </ul>
+{% endblock %}
