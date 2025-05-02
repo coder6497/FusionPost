@@ -4,8 +4,19 @@
 
 {% block body %}
     <h1>{{ text_post.title }}</h1>
+    {% if text_post.image %}
+        <dev class="border border-primary border2">
+            <img src="{{ text_post.image.url }}" width="500">
+        </dev>
+    {% endif %}
     <br><br>
-    <div class="border border-black rounded-3">
-        <pre>{{ text_post.body }}</pre>
-    </div>
+    {% if text_post.body %}
+        <div class="border border-black rounded-3" style="font-size:  large;">
+            <pre>{{ text_post.body }}</pre>
+        </div>
+    {% endif %}
+    <br><br>
+    <div class="alert alert-info" role="alert">
+        Опубликован: {{ text_post.publish }}
+      </div>
 {% endblock %}

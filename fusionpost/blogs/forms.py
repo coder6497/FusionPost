@@ -17,8 +17,8 @@ class RegistrationForm(UserCreationForm):
 class TextPostForm(forms.ModelForm):
     class Meta:
         model = TextPost
-        fields = ['title', 'body']
+        fields = ['image', 'title', 'body', 'private']
         widgets = {'body': forms.Textarea}
-        labels = {"title": "Название", "body": "Текст"}
+        labels = {"title": "Название", "body": "Текст", "Изображение": "image", "Приватный": "private"}
 
 

@@ -4,4 +4,16 @@
 {% block body %}
     <h1>Главная</h1>
     <br><br>
+    <div class="list-group">
+        {% for post in text_posts %}
+            <a href="{% url "blogs:text_post_detail" post.id %}" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ post.title }}</h5>
+                    <small class="text-body-secondary">{{ post.publish }}</small>
+                    <small class="text-body-secondary">{{ post.author }}</small>
+                </div>
+                <p class="mb-1">{{ post.body|truncatewords:30 }}</p>
+            </a>
+        {% endfor %}
+      </div>
 {% endblock %}
