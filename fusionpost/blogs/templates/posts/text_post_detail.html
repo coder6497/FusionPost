@@ -1,9 +1,12 @@
 {% extends "base.html" %}
+{% load blogs_tags %}
+
 
 {% block title %}{{ text_post.title }}{% endblock %}
 
 {% block body %}
     <h1>{{ text_post.title }}</h1>
+    <br><br>
     {% if text_post.image %}
         <dev class="border border-primary border2">
             <img src="{{ text_post.image.url }}" width="500">
@@ -17,6 +20,13 @@
     {% endif %}
     <br><br>
     <div class="alert alert-info" role="alert">
-        Опубликован: {{ text_post.publish }}
+        <ul>
+            <li>Опубликован: {{ text_post.publish }}</li>
+            {% if text_post.image %}
+                <li>Название файла: {% image_name_without_path text_post.id %}</li>
+                <li>Размер файла: {% get_image_size_in_megabytes text_post.id %} МБ</li>
+                <li>Размер изображения: {{ text_post.image.height }}x{{ text_post.image.width }}</li>
+            {% endif %}
+        </ul>
       </div>
 {% endblock %}
