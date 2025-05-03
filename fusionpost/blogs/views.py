@@ -46,13 +46,13 @@ def delete_post(request, post_id):
 
 def text_post_detail(request, text_post_id):
     text_post = TextPost.objects.get(id=text_post_id)
-    comments = Comment.objects.all()
+    comments = Comment.objects.filter(post=text_post)
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
-            comment.post = text_post
             comment.author = request.user
+            comment.post = text_post
             comment.save()
     else:
         comment_form = CommentForm()
