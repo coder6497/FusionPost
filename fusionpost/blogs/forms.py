@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import TextPost, CustomUser
+from .models import TextPost, CustomUser, Comment
 
 class RegistrationForm(UserCreationForm):
     class Meta:
@@ -22,3 +22,19 @@ class TextPostForm(forms.ModelForm):
         labels = {"title": "Название", "body": "Текст", "Изображение": "image", "Приватный": "private"}
 
 
+class EditUserForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'email', 'phone', 'avatar']
+        labels = {
+            "username": "Имя пользователя",
+            "email": "E-Mail",
+            "phone": "Номер телефона"
+        }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['title', 'body']
+        labels = {"title": "Название", "body": "Текст"}

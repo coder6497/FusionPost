@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TextPost, CustomUser
+from .models import TextPost, CustomUser, Comment
 
 
 @admin.register(TextPost)
@@ -14,3 +14,12 @@ class TextPostAdmin(admin.ModelAdmin):
 @admin.register(CustomUser)
 class CustomModelAdmin(admin.ModelAdmin):
     list_display =  ['username', 'email', 'phone']
+
+
+@admin.register(Comment)
+class Comment(admin.ModelAdmin):
+    list_display = ['post', 'author', 'title', 'body', 'publish']
+    list_filter = ['author', 'publish']
+    date_hierarchy = 'publish'
+    ordering = ['publish']
+    show_facets = admin.ShowFacets.ALWAYS

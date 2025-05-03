@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load blogs_tags %}
-
+{% load crispy_forms_tags %}
 
 {% block title %}{{ text_post.title }}{% endblock %}
 
@@ -28,5 +28,31 @@
                 <li>Размер изображения: {{ text_post.image.height }}x{{ text_post.image.width }}</li>
             {% endif %}
         </ul>
-      </div>
+    </div>
+    <br><br><br><br><br>
+    <br><br><br><br><br>
+    <ol class="list-group list-group-numbered">
+        {% for comment in comments %}
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">Коментарий  {{ forloop.counter }} от {{comment.author}}</div>
+                {{ comment.body }}
+            </div>
+            <span class="badge text-bg-primary rounded-pill">{{ comment.publish }}</span>
+            </li>
+        {% endfor %}
+      </ol>
+      <br><br><br>
+      <h3>Оставить коментарий</h3>
+      {% if request.user.is_authenticated %}
+            <form method="post" action="{% url "blogs:text_post_detail" text_post.id %}">
+                    {% csrf_token %}
+                    {{ comment_form|crispy }}
+                    <input class="btn btn-success" type="submit" value="Оставить комментарий">
+            </form>
+      {% else %}
+        <div class="alert alert-warning" role="alert">
+            Чтобы оставить коментарий, войдите или зарегистрируйтесь.
+        </div>
+      {% endif %}
 {% endblock %}

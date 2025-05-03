@@ -29,6 +29,22 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(TextPost, on_delete=models.CASCADE, related_name='blog_text_comment')
+    author = models.CharField(max_length=10)
+    title = models.CharField(max_length=100)
+    body = models.CharField()
+    publish = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['publish']
+        indexes = [models.Index(fields=['publish'])]
+    
+
+    def __str__(self):
+        return f"От {self.author} для {self.title}"
     
 
 @receiver(signals.post_delete)
