@@ -5,9 +5,11 @@ from .models import TextPost, CustomUser, Comment
 class RegistrationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'phone', 'password1', 'password2', 'avatar']
+        fields = ['username', 'email', 'first_name', 'last_name', 'phone', 'password1', 'password2', 'avatar']
         labels = {
             'username': "Имя пользователя",
+            "first_name": "Имя",
+            "last_name": "Фамилия",
             "password1": "Пароль",
             "password2": "Повторите пароль",
             "email": "E-Mail"
@@ -25,9 +27,11 @@ class TextPostForm(forms.ModelForm):
 class EditUserForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'phone', 'avatar']
+        fields = ['username', 'first_name', 'last_name', 'email', 'phone', 'avatar']
         labels = {
             "username": "Имя пользователя",
+            "first_name": "Имя",
+            "last_name": "Фамилия",
             "email": "E-Mail",
             "phone": "Номер телефона"
         }

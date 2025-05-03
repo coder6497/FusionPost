@@ -59,7 +59,19 @@ def text_post_detail(request, text_post_id):
     return render(request, 'posts/text_post_detail.html', {"text_post": text_post, "comments": comments, "comment_form": comment_form})
 
 @login_required
-def about_user(request):
+def edit_post(request, post_id):
+    text_post = TextPost.objects.get(id=post_id)
+    if request.method == 'POST':
+        edit_form = TextPostForm(request.POST, request.FILES, instance=text_post)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect('blogs:text_post_detail', text_post_id=text_post.id)
+    else:
+        edit_form = TextPostForm(instance=text_post)
+    return render(request, 'posts/edit_post.html', {'text_post': text_post, 'edit_form': edit_form})
+
+@login_required
+def about_user(request): 
     return render(request, 'about_user.html', {"user": CustomUser.objects.get(id=request.user.id)})
 
 @login_required

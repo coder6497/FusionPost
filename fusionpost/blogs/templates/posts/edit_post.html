@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Редактировать {{ text_post.title }}{% endblock %}
+
+{% block body %}
+    <h1>Редактировать пост "{{ text_post.title }}"</h1>
+    <form method="post" action="{% url "blogs:edit_post" text_post.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{edit_form|crispy }}
+        <input type="submit" class="btn btn-success" value="Редактировать">
+    </form>
+{% endblock %}

@@ -16,6 +16,7 @@
                 </div>
                 <p class="mb-1">{{ post.body|truncatewords:30 }}</p>
                 <a href="{% url "blogs:delete_post" post.id %}">Удалить</a>
+                <a href="{% url "blogs:edit_post" post.id %}">Редактировать</a>
             </a>
         {% endfor %}
       </div>
