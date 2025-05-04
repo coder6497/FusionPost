@@ -21,7 +21,8 @@
     <br><br>
     <div class="alert alert-info" role="alert">
         <ul>
-            <li>Опубликован: {{ text_post.publish }}</li>
+            <li>Опубликован: {{ text_post.publish }} </li>
+            <li>Опубликовал: {{ request.user }}</li>
             {% if text_post.image %}
                 <li>Название файла: {% image_name_without_path text_post.id %}</li>
                 <li>Размер файла: {% get_image_size_in_megabytes text_post.id %} МБ</li>
