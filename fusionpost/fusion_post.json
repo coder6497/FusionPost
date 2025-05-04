@@ -1,0 +1,951 @@
+[
+{
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+        "name": "Can add permission",
+        "content_type": 1,
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can change permission",
+        "content_type": 1,
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": 1,
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+        "name": "Can view permission",
+        "content_type": 1,
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+        "name": "Can add group",
+        "content_type": 2,
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can change group",
+        "content_type": 2,
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+        "name": "Can delete group",
+        "content_type": 2,
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+        "name": "Can view group",
+        "content_type": 2,
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+        "name": "Can add content type",
+        "content_type": 3,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can change content type",
+        "content_type": 3,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": 3,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can view content type",
+        "content_type": 3,
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 4,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 4,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 4,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+        "name": "Can view session",
+        "content_type": 4,
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+        "name": "Can add user",
+        "content_type": 5,
+        "codename": "add_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+        "name": "Can change user",
+        "content_type": 5,
+        "codename": "change_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+        "name": "Can delete user",
+        "content_type": 5,
+        "codename": "delete_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+        "name": "Can view user",
+        "content_type": 5,
+        "codename": "view_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+        "name": "Can add text post",
+        "content_type": 6,
+        "codename": "add_textpost"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+        "name": "Can change text post",
+        "content_type": 6,
+        "codename": "change_textpost"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+        "name": "Can delete text post",
+        "content_type": 6,
+        "codename": "delete_textpost"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+        "name": "Can view text post",
+        "content_type": 6,
+        "codename": "view_textpost"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": 7,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": 7,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": 7,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": 7,
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+        "name": "Can add comment",
+        "content_type": 8,
+        "codename": "add_comment"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+        "name": "Can change comment",
+        "content_type": 8,
+        "codename": "change_comment"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+        "name": "Can delete comment",
+        "content_type": 8,
+        "codename": "delete_comment"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+        "name": "Can view comment",
+        "content_type": 8,
+        "codename": "view_comment"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+        "app_label": "blogs",
+        "model": "customuser"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+        "app_label": "blogs",
+        "model": "textpost"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+        "app_label": "blogs",
+        "model": "comment"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "0t9fqahmkhryzue7qtyxx7o142flcdy6",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQBe_iGlne2PEulPQ5g7X-4QCypTipEHeHSCmgfTPzXsLxtha39bS4OYqLQHH63TyHR6o7iHeutyZDq-sye7kr8qBdTi2m5_Vw_w4K9_KtQZFmiGkgpUfKYyJQikywCUgZVBTResMAxNkzDsgZrcWgz5BJBxTvD7j7Nus:1uAZg5:VG6xk2yGCrQDNEdU9tsdtPicKpNKG1IMsQJ58HdyiYw",
+        "expire_date": "2025-05-15T19:34:37.044Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "c2fovbofplnu2lsf1zjhb0qfyudmtdbe",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQBe_iGlne2PEulPQ5g7X-4QCypTipEHeHSCmgfTPzXsLxtha39bS4OYqLQHH63TyHR6o7iHeutyZDq-sye7kr8qBdTi2m5_Vw_w4K9_KtQZFmiGkgpUfKYyJQikywCUgZVBTResMAxNkzDsgZrcWgz5BJBxTvD7j7Nus:1uB777:1HjCM9gsuiRKKLWJcLfub_8ToecMJXs-6RwZh4RiDCs",
+        "expire_date": "2025-05-17T07:16:45.353Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "cw1dnl3dwohpu5afcf2t2qwsc9auop1x",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQBe_iGlne2PEulPQ5g7X-4QCypTipEHeHSCmgfTPzXsLxtha39bS4OYqLQHH63TyHR6o7iHeutyZDq-sye7kr8qBdTi2m5_Vw_w4K9_KtQZFmiGkgpUfKYyJQikywCUgZVBTResMAxNkzDsgZrcWgz5BJBxTvD7j7Nus:1uBK8Z:FPUV5nfhtHAGaJM9AlHPOviL7a1sAtFgLxTawsiZFe8",
+        "expire_date": "2025-05-17T21:11:07.496Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "ksnz8k6u86zqssy1f7l7curwqqtbi313",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQBe_iGlne2PEulPQ5g7X-4QCypTipEHeHSCmgfTPzXsLxtha39bS4OYqLQHH63TyHR6o7iHeutyZDq-sye7kr8qBdTi2m5_Vw_w4K9_KtQZFmiGkgpUfKYyJQikywCUgZVBTResMAxNkzDsgZrcWgz5BJBxTvD7j7Nus:1uBXJ3:y8HHAxG4bhWKgTe0P8nyOn-3I1K1Uz6tSND8fJrylO8",
+        "expire_date": "2025-05-18T11:14:49.178Z"
+    }
+},
+{
+    "model": "blogs.textpost",
+    "pk": 12,
+    "fields": {
+        "author": 2,
+        "image": "",
+        "title": "Второй пост",
+        "body": "gregregregr",
+        "publish": "2025-05-03T11:55:50.058Z",
+        "private": false
+    }
+},
+{
+    "model": "blogs.textpost",
+    "pk": 14,
+    "fields": {
+        "author": 2,
+        "image": "",
+        "title": "Первый пост",
+        "body": "текст",
+        "publish": "2025-05-03T15:07:38.807Z",
+        "private": true
+    }
+},
+{
+    "model": "blogs.customuser",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$ao2l72outZ1xxY3ABEvbvO$5qqrRQdKWIUsCLY4PN5sCHNS4qrCYSCzupi1AEO0R/A=",
+        "last_login": "2025-05-01T18:53:26.108Z",
+        "is_superuser": false,
+        "username": "GoydaImage",
+        "first_name": "",
+        "last_name": "",
+        "email": "goyda@mail.ru",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-04-30T21:22:41Z",
+        "phone": "+792577777",
+        "avatar": "users/2025/04/30/19d2fbba84a58e6e7be43492ffc17b6e.jpg",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "blogs.customuser",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$iMEkmgbemJ1SXUjGW8NzxU$O7TxbC6w4sMlwJ0ck5cV6AsGsC57BlJMNth+3HbiHyQ=",
+        "last_login": "2025-05-03T21:03:07.066Z",
+        "is_superuser": true,
+        "username": "coder6497",
+        "first_name": "",
+        "last_name": "",
+        "email": "rty.sem@yandex.ru",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-04-30T21:26:47.178Z",
+        "phone": "+79251627733",
+        "avatar": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "blogs.customuser",
+    "pk": 7,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$H8TuoQxfcspgZrPO3Aa2BY$wiTgGrVNpCKAoNtT0DKp0gVEqipoeM+14Ynm7Dy4hsM=",
+        "last_login": "2025-05-04T11:14:49.172Z",
+        "is_superuser": false,
+        "username": "Миша",
+        "first_name": "",
+        "last_name": "",
+        "email": "rty.sem@yandex.ru",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-05-01T19:23:45.254Z",
+        "phone": "+79251627733",
+        "avatar": "users/2025/05/01/WhatsApp_Image_2025-01-16_at_18.19.02.jpeg",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2025-04-30T21:29:55.439Z",
+        "user": 2,
+        "content_type": 5,
+        "object_id": "1",
+        "object_repr": "GoydaImage",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Avatar\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2025-04-30T21:42:57.093Z",
+        "user": 2,
+        "content_type": 5,
+        "object_id": "3",
+        "object_repr": "Semon",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2025-04-30T21:44:55.774Z",
+        "user": 2,
+        "content_type": 5,
+        "object_id": "4",
+        "object_repr": "Semon",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2025-05-01T19:22:46.957Z",
+        "user": 2,
+        "content_type": 5,
+        "object_id": "6",
+        "object_repr": "Миша",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2025-05-02T15:37:41.397Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "1",
+        "object_repr": "От coder6497 для КРАСИВЫЙ",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2025-05-02T15:37:48.078Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "1",
+        "object_repr": "От coder6497 для КРАСИВЫЙ",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2025-05-02T15:44:46.383Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "2",
+        "object_repr": "От coder6497 для Красивый кот",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2025-05-03T07:49:01.293Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "3",
+        "object_repr": "От Миша для Миша",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+        "action_time": "2025-05-03T07:49:04.929Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "4",
+        "object_repr": "От Миша для Миша",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+        "action_time": "2025-05-03T07:49:13.445Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "5",
+        "object_repr": "От Миша для Миша",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+        "action_time": "2025-05-03T07:49:21.561Z",
+        "user": 2,
+        "content_type": 5,
+        "object_id": "5",
+        "object_repr": "huy",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields": {
+        "action_time": "2025-05-03T09:55:09.016Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "8",
+        "object_repr": "От Миша для МИШАААА",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+        "action_time": "2025-05-03T09:55:12.226Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "2",
+        "object_repr": "От coder6497 для Красивый кот",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields": {
+        "action_time": "2025-05-03T09:55:15.930Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "7",
+        "object_repr": "От Миша для МИШАААА",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields": {
+        "action_time": "2025-05-03T10:00:15.481Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "9",
+        "object_repr": "От coder6497 для Какой-то коментарий",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields": {
+        "action_time": "2025-05-03T10:04:45.547Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "10",
+        "object_repr": "От coder6497 для Комент для \"КАКОЙ-ТО ПОСТ\"",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 17,
+    "fields": {
+        "action_time": "2025-05-03T10:05:14.932Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "11",
+        "object_repr": "От coder6497 для КОМЕНТАРИЙ ДЛЯ МИШИ",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 18,
+    "fields": {
+        "action_time": "2025-05-03T10:05:28.551Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "12",
+        "object_repr": "От coder6497 для ПРОСТО КОМЕНТАРИЙ",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 19,
+    "fields": {
+        "action_time": "2025-05-03T11:41:19.094Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "12",
+        "object_repr": "От coder6497 для ПРОСТО КОМЕНТАРИЙ",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 20,
+    "fields": {
+        "action_time": "2025-05-03T11:41:24.779Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "10",
+        "object_repr": "От coder6497 для Комент для \"КАКОЙ-ТО ПОСТ\"",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 21,
+    "fields": {
+        "action_time": "2025-05-03T11:41:33.190Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "11",
+        "object_repr": "От coder6497 для КОМЕНТАРИЙ ДЛЯ МИШИ",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 22,
+    "fields": {
+        "action_time": "2025-05-03T11:46:09.582Z",
+        "user": 2,
+        "content_type": 6,
+        "object_id": "1",
+        "object_repr": "КАКОЙ-ТО ПОСТ",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 23,
+    "fields": {
+        "action_time": "2025-05-03T11:46:13.281Z",
+        "user": 2,
+        "content_type": 6,
+        "object_id": "7",
+        "object_repr": "Фото Миши",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 24,
+    "fields": {
+        "action_time": "2025-05-03T11:48:59.969Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "13",
+        "object_repr": "От coder6497 для Титул",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 25,
+    "fields": {
+        "action_time": "2025-05-03T14:13:04.175Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "16",
+        "object_repr": "От coder6497 для Коментарий",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 26,
+    "fields": {
+        "action_time": "2025-05-03T14:13:07.405Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "15",
+        "object_repr": "От coder6497 для Коментарий",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 27,
+    "fields": {
+        "action_time": "2025-05-03T14:13:10.188Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "18",
+        "object_repr": "От coder6497 для Комментарий",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 28,
+    "fields": {
+        "action_time": "2025-05-03T14:13:17.672Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "20",
+        "object_repr": "От coder6497 для Комментарий",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 29,
+    "fields": {
+        "action_time": "2025-05-03T14:13:22.040Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "19",
+        "object_repr": "От coder6497 для Комментарий",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 30,
+    "fields": {
+        "action_time": "2025-05-03T14:13:28.856Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "17",
+        "object_repr": "От coder6497 для Комментарий",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 31,
+    "fields": {
+        "action_time": "2025-05-03T14:13:32.119Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "14",
+        "object_repr": "От coder6497 для Коментарий",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 32,
+    "fields": {
+        "action_time": "2025-05-03T21:06:44.518Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "24",
+        "object_repr": "От coder6497 для Первый пост",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 33,
+    "fields": {
+        "action_time": "2025-05-03T21:06:51.116Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "22",
+        "object_repr": "От Миша для МИША МИША МИША",
+        "action_flag": 2,
+        "change_message": "[]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 34,
+    "fields": {
+        "action_time": "2025-05-03T21:06:54.997Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "25",
+        "object_repr": "От coder6497 для Второй пост",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 35,
+    "fields": {
+        "action_time": "2025-05-03T21:06:58.180Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "23",
+        "object_repr": "От coder6497 для Первый пост",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 36,
+    "fields": {
+        "action_time": "2025-05-03T21:07:03.728Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "22",
+        "object_repr": "От Миша для МИША МИША МИША",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 37,
+    "fields": {
+        "action_time": "2025-05-03T21:07:06.862Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "21",
+        "object_repr": "От coder6497 для Какое-то название",
+        "action_flag": 3,
+        "change_message": ""
+    }
+}
+]
