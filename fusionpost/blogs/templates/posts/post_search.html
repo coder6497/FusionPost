@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Найти{% endblock %}
+
+{% block body %}
+    <h1>Найти пост</h1>
+    <br>
+    <form method="get">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class="btn btn-success" type="submit" value="Найти">
+    </form>
+    <br>
+    {% if query %}
+        {% for post in result %}
+            <h4><a href="{% url "blogs:text_post_detail" post.id %}">{{forloop.counter}}. {{ post }} от {{ post.author }}</a></h4>
+            {{ post.body|truncatewords:30 }}
+            <br><br>
+            --------------------------------------------------------------------------------------------------
+        {% endfor %}
+    {% endif %}
+{% endblock %}
