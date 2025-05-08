@@ -4,3 +4,4 @@ django-crispy-forms
 pillow
 psycopg2
 crispy-bootstrap5
+tzdata
