@@ -1,0 +1,6 @@
+Django
+python-decouple
+django-crispy-forms
+pillow
+psycopg2
+crispy-bootstrap5
