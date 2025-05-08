@@ -143,6 +143,6 @@ AUTH_USER_MODEL = 'blogs.CustomUser'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# CSRF_TRUSTED_ORIGINS = [
-#     "*",  # Основной домен
-# ]
+CSRF_TRUSTED_ORIGINS = [
+    "https://coder6497-fusionpost-163b.twc1.net",  # Основной домен
+]
