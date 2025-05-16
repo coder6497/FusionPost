@@ -5,3 +5,5 @@ pillow
 psycopg2
 crispy-bootstrap5
 tzdata
+boto3
+django-storages
