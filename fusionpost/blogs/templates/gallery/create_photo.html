@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ header }}{% endblock %}
+
+{% block body %}
+    <h1>{{ header }}</h1>
+    <br>
+    <form method="post" action="action="{% url "blogs:create_post" "photo_gallery" %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <br>
+        <input type="submit" class="btn btn-success" value="Делать">
+    </form>
+{% endblock %}

@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Список постов</h1>
     <br><br>
-    <a class="btn btn-outline-primary" href="{% url "blogs:create_text_post" %}">Создать текстовый пост</a>
+    <a class="btn btn-outline-primary" href="{% url "blogs:create_post" "text_post" %}">Создать текстовый пост</a>
     <br><br>
     <div class="list-group">
         {% for post in text_posts %}

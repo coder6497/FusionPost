@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import TextPost, CustomUser, Comment
+from .models import TextPost, CustomUser, Comment, PhotoForGallery
 
 class RegistrationForm(UserCreationForm):
     class Meta:
@@ -42,3 +42,10 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ['title', 'body']
         labels = {"title": "Название", "body": "Текст"}
+    
+
+class PhotoForGalleryForm(forms.ModelForm):
+    class Meta:
+        model = PhotoForGallery
+        fields = ['photo']
+        labels = {'photo': 'Загрузить фотографию 📷'}

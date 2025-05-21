@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.core.paginator import Paginator
-from .forms import RegistrationForm, TextPostForm, EditUserForm, CommentForm
-from .models import TextPost, CustomUser, Comment
+from .forms import RegistrationForm, TextPostForm, EditUserForm, CommentForm, PhotoForGalleryForm
+from .models import TextPost, CustomUser, Comment, PhotoForGallery
 
 def index(request):
     post_list = TextPost.objects.filter(private=False)
@@ -27,17 +27,34 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 @login_required
-def create_text_post(request):
+def create_post(request, post_type):
+    post_params = {
+        "templates_by_post_type": {
+            "text_post": "posts/create_text_post.html",
+            "photo_gallery": "gallery/create_photo.html"
+        },
+        "forms_by_tags": {
+            "text_post": [TextPostForm(request.POST, request.FILES), TextPostForm()],
+            "photo_gallery": [PhotoForGalleryForm(request.POST, request.FILES), PhotoForGalleryForm()]
+        },
+        "headers": {
+            "text_post": "Создать текстовый пост",
+            "photo_gallery": "Галерея"
+        }
+    }
     if request.method == 'POST':
-        form = TextPostForm(request.POST, request.FILES)
+        form = post_params["forms_by_tags"][post_type][0]
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect('blogs:post_list')
+            if post_type == "text_post":
+                return redirect('blogs:post_list')
     else:
-        form = TextPostForm()
-    return render(request, "posts/create_text_post.html", {'form': form})
+        form = post_params["forms_by_tags"][post_type][1]
+
+    template = post_params["templates_by_post_type"][post_type]
+    return render(request, template, {'form': form, "header": post_params["headers"][post_type]})
 
 @login_required
 def post_list(request):
@@ -74,6 +91,7 @@ def edit_post(request, post_id):
     else:
         edit_form = TextPostForm(instance=text_post)
     return render(request, 'posts/edit_post.html', {'text_post': text_post, 'edit_form': edit_form})
+
 
 @login_required
 def about_user(request): 
