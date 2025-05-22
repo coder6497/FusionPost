@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ header }}{% endblock %}
+
+{% block body %}
+    <h1>{{ header }}</h1>
+    <br>
+    <form method="post" action="{% url "blogs:create_post" "photo_gallery" %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <br>
+        <input type="submit" class="btn btn-success" value="Делать">
+    </form>
+    <br><br>
+    <div class="container text-center">
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+        <style>
+            img {
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+            }
+        </style>
+        {% for photo in photos %}
+            <div class="col">
+                <a href="{% url "blogs:post_detail" photo.id "photo_gallery" %}">
+                    <div class="p-3"><img src="{{ photo.image.url }}" width="300"></div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <h1>Список постов</h1>
+    <br><br>
+    <a class="btn btn-outline-primary" href="{% url "blogs:create_post" "text_post" %}">Создать текстовый пост</a>
+    <br><br>
+    <div class="list-group">
+        {% for post in posts %}
+            <a href="{% url "blogs:post_detail" post.id "text_post" %}" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ post.title }}</h5>
+                    <small class="text-body-secondary">{{ post.publish }}</small>
+                </div>
+                <p class="mb-1">{{ post.body|truncatewords:30 }}</p>
+                <a href="{% url "blogs:delete_post" post.id "text_post" %}">Удалить</a>
+                <a href="{% url "blogs:edit_post" post.id %}">Редактировать</a>
+            </a>
+        {% endfor %}
+      </div>
+{% endblock %}
