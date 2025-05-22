@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.core.paginator import Paginator
-from .forms import RegistrationForm, TextPostForm, EditUserForm, CommentForm, PhotoForGalleryForm
+from .forms import RegistrationForm, TextPostForm, EditUserForm, CommentForm
 from .models import TextPost, CustomUser, Comment, PhotoForGallery
+from .parameters import get_params
 
 def index(request):
     post_list = TextPost.objects.filter(private=False)
@@ -28,33 +29,28 @@ def dashboard(request):
 
 @login_required
 def create_post(request, post_type):
-    post_params = {
-        "templates_by_post_type": {
-            "text_post": "posts/create_text_post.html",
-            "photo_gallery": "gallery/create_photo.html"
-        },
-        "forms_by_tags": {
-            "text_post": [TextPostForm(request.POST, request.FILES), TextPostForm()],
-            "photo_gallery": [PhotoForGalleryForm(request.POST, request.FILES), PhotoForGalleryForm()]
-        },
-        "headers": {
-            "text_post": "Создать текстовый пост",
-            "photo_gallery": "Галерея"
-        }
-    }
+    post_params = get_params(request.POST, request.FILES)
     if request.method == 'POST':
         form = post_params["forms_by_tags"][post_type][0]
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            if post_type == "text_post":
-                return redirect('blogs:post_list')
+            match post_type:
+                case "text_post":
+                    return redirect('blogs:post_list')
+                case "photo_gallery":
+                    return redirect("blogs:create_post", post_type=post_type)
     else:
         form = post_params["forms_by_tags"][post_type][1]
 
     template = post_params["templates_by_post_type"][post_type]
-    return render(request, template, {'form': form, "header": post_params["headers"][post_type]})
+
+    template_params = {'form': form,
+                       "header": post_params["headers"][post_type],
+                       "photos": PhotoForGallery.objects.filter(author=request.user)}
+
+    return render(request, template, template_params)
 
 @login_required
 def post_list(request):

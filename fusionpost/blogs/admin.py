@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TextPost, CustomUser, Comment
+from .models import TextPost, CustomUser, Comment, PhotoForGallery
 
 
 @admin.register(TextPost)
@@ -17,8 +17,17 @@ class CustomModelAdmin(admin.ModelAdmin):
 
 
 @admin.register(Comment)
-class Comment(admin.ModelAdmin):
+class CommentAdmin(admin.ModelAdmin):
     list_display = ['post', 'author', 'title', 'body', 'publish']
+    list_filter = ['author', 'publish']
+    date_hierarchy = 'publish'
+    ordering = ['publish']
+    show_facets = admin.ShowFacets.ALWAYS
+
+
+@admin.register(PhotoForGallery)
+class PhotoForGalleryAdmin(admin.ModelAdmin):
+    list_display = ['photo', 'author', 'publish']
     list_filter = ['author', 'publish']
     date_hierarchy = 'publish'
     ordering = ['publish']

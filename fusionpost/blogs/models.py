@@ -3,7 +3,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from storages.backends.s3boto3 import S3Boto3Storage
-
+from django.core.validators import FileExtensionValidator
 
 class TextPost(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='blog_text_posts')
@@ -46,6 +46,12 @@ class Comment(models.Model):
 
 
 class PhotoForGallery(models.Model):
-    photo = models.FileField(storage=S3Boto3Storage(), upload_to='users/%Y/%m/%d/', blank=True)
-    author = models.CharField(max_length=10)
+    photo = models.FileField(
+        storage=S3Boto3Storage(),
+        upload_to='gallery/%Y/%m/%d/',
+        validators=[
+            FileExtensionValidator(allowed_extensions=['png', 'jpg', 'bmp'])
+            ]
+        )
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='photos_from_gallery')
     publish = models.DateTimeField(default=timezone.now)
