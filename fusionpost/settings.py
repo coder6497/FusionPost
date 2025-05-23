@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-j4c02t+=e&$tvq1r3l$_at%5efq7qe$)nh+om0_tu3*+e*tipd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['coder6497-fusionpost-a79d.twc1.net', 'fusionpost.ru', '85.193.86.191', '127.0.0.1']
+ALLOWED_HOSTS = ['coder6497-fusionpost-a79d.twc1.net', 'fusionpost.ru', '85.193.86.191']
 
 
 # Application definition
@@ -145,9 +145,10 @@ AUTH_USER_MODEL = 'blogs.CustomUser'
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_ENDPOINT_URL = "http://localhost:9001"
+AWS_S3_ENDPOINT_URL = "https://s3.twcstorage.ru"
 AWS_S3_USE_SSL = False
 AWS_DEFAULT_ACL = "public-read"
+AWS_S3_REGION_NAME = "ru-1" 
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/"
