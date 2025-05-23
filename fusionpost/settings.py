@@ -155,4 +155,4 @@ MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/"
 # MEDIA_ROOT = BASE_DIR / 'media'
 
 
-CSRF_TRUSTED_ORIGINS = ['https://coder6497-fusionpost-a79d.twc1.net', 'fusionpost.ru']
+CSRF_TRUSTED_ORIGINS = ['https://coder6497-fusionpost-a79d.twc1.net', 'https://fusionpost.ru']
