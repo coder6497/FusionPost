@@ -50,7 +50,7 @@ class PhotoForGallery(models.Model):
         storage=S3Boto3Storage(),
         upload_to='gallery/%Y/%m/%d/',
         validators=[
-            FileExtensionValidator(allowed_extensions=['png', 'jpg', 'bmp'])
+            FileExtensionValidator(allowed_extensions=['png', 'jpg', 'bmp', 'jpeg'])
             ]
         )
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='photos_from_gallery')
