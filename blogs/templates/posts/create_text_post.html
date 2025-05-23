@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+<<<<<<< HEAD
 {% block title %}Создать текстовый пост{% endblock %}
 
 {% block body %}
@@ -9,5 +10,16 @@
         {% csrf_token %}
         {{form|crispy}}
         <input class="btn btn-success" type="submit" value="Создать">
+=======
+{% block title %}{{ header }}{% endblock %}
+
+{% block body %}
+    <h1>{{ header }}</h1>
+    <br><br>
+    <form method="post" action="{% url "blogs:create_post" "text_post" %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input class="btn btn-success" type="submit" value="Делать">
+>>>>>>> main
     </form>
 {% endblock %}

@@ -28,42 +28,64 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 @login_required
-def create_text_post(request):
+def create_post(request, post_type):
+    post_params = get_params_for_createobject(request.POST, request.FILES)
     if request.method == 'POST':
-        form = TextPostForm(request.POST, request.FILES)
+        form = post_params["forms_by_tags"][post_type][0]
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect('blogs:post_list')
+            match post_type:
+                case "text_post":
+                    return redirect('blogs:post_list')
+                case "photo_gallery":
+                    return redirect("blogs:create_post", post_type=post_type)
     else:
-        form = TextPostForm()
-    return render(request, "posts/create_text_post.html", {'form': form})
+        form = post_params["forms_by_tags"][post_type][1]
+
+    template = post_params["templates_by_post_type"][post_type]
+
+    template_params = {'form': form,
+                       "header": post_params["headers"][post_type],
+                       "photos": PhotoForGallery.objects.filter(author=request.user)}
+
+    return render(request, template, template_params)
 
 @login_required
 def post_list(request):
-    return render(request, 'posts/post_list.html', {"text_posts": TextPost.objects.filter(author=request.user)})
-
+    return render(request, 'posts/post_list.html', {"posts": TextPost.objects.filter(author=request.user)})
 
 @login_required
-def delete_post(request, post_id):
-    TextPost.objects.filter(id=post_id).delete()
+def delete_post(request, post_id, post_type):
+    post_params = get_params_for_getobject()
+    post_params[post_type].objects.filter(id=post_id).delete()
     return redirect('blogs:post_list')
 
-def text_post_detail(request, text_post_id):
-    text_post = TextPost.objects.get(id=text_post_id)
-    comments = Comment.objects.filter(post=text_post)
-    if request.method == 'POST':
-        comment_form = CommentForm(request.POST)
-        if comment_form.is_valid():
-            comment = comment_form.save(commit=False)
-            comment.author = request.user
-            comment.post = text_post
-            comment.save()
-            return redirect('blogs:text_post_detail', text_post_id=text_post.id)
-    else:
-        comment_form = CommentForm()
-    return render(request, 'posts/text_post_detail.html', {"text_post": text_post, "comments": comments, "comment_form": comment_form})
+def post_detail(request, post_id, post_type):
+    post_params = get_params_for_getobject()
+    post = post_params[post_type].objects.get(id=post_id)
+
+    is_unauthorized = post.author != request.user
+    is_private_text = post_type == 'text_post' and post.private
+    is_photo_gallery = post_type == 'photo_gallery'
+    if is_unauthorized and (is_private_text or is_photo_gallery):
+            raise Http404("Запись не найдена или недоступна")
+    
+    comments, comment_form = None, None
+    if post_type == "text_post":
+        comments = Comment.objects.filter(post=post)
+        if request.method == 'POST':
+            comment_form = CommentForm(request.POST)
+            if comment_form.is_valid():
+                comment = comment_form.save(commit=False)
+                comment.author = request.user
+                comment.post = post
+                comment.save()
+        else:
+            comment_form = CommentForm()
+    params = {"post": post, "comments": comments, "comment_form": comment_form, "post_type": post_type}
+    return render(request, 'posts/post_detail.html', params)
 
 @login_required
 def edit_post(request, post_id):
@@ -72,7 +94,7 @@ def edit_post(request, post_id):
         edit_form = TextPostForm(request.POST, request.FILES, instance=text_post)
         if edit_form.is_valid():
             edit_form.save()
-            return redirect('blogs:text_post_detail', text_post_id=text_post.id)
+            return redirect('blogs:post_detail', post_id=text_post.id, post_type="text_post")
     else:
         edit_form = TextPostForm(instance=text_post)
     return render(request, 'posts/edit_post.html', {'text_post': text_post, 'edit_form': edit_form})

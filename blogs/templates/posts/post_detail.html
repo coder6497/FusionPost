@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load blogs_tags %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ post.title }}</h1>
+    <br><br>
+    {% if post.image %}
+        <dev class="border border-primary border2">
+            <img src="{{ post.image.url }}" width="500">
+        </dev>
+    {% endif %}
+    <br><br>
+    {% if post.body %}
+        <div class="border border-black rounded-3" style="font-size:  large;">
+            <pre>{{ post.body }}</pre>
+        </div>
+    {% endif %}
+    <br><br>
+    <div class="alert alert-info" role="alert">
+        <ul>
+            <li>Опубликован: {{ post.publish }} </li>
+            <li>Опубликовал: {{ post.author }}</li>
+            {% if post.image %}
+                <li>Название файла: {% image_name_without_path post.id post_type %}</li>
+                <li>Размер файла: {% get_image_size_in_megabytes post.id post_type %} МБ</li>
+                <li>Размер изображения: {% get_image_width_height post.id post_type %}</li>
+            {% endif %}
+        </ul>
+    </div>
+    <br><br><br><br><br>
+    <br><br><br><br><br>
+    {% if post_type == "text_post" %}
+        {% if comments %}
+            <ol class="list-group list-group-numbered">
+                {% for comment in comments %}
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Коментарий  {{ forloop.counter }} {{ comment.title }} от {{comment.author}}</div>
+                        {{ comment.body }}
+                    </div>
+                    <span class="badge text-bg-primary rounded-pill">{{ comment.publish }}</span>
+                    </li>
+                {% endfor %}
+            </ol>
+        {% else %}
+        <div class="alert alert-dark" role="alert">
+            Пока никто не оставил коментарий
+        </div>
+        {% endif %}
+        <br><br><br>
+        {% if request.user.is_authenticated %}
+        <h3>Оставить коментарий</h3>
+        <form action="{% url "blogs:post_detail" post.id post_type %}" method="post">
+            {% csrf_token %}
+            {{ comment_form|crispy }}
+            <input type="submit" class="btn btn btn-success" value="Оставить коментарий">
+        </form>
+        {% endif %}
+    {% endif %}
+{% endblock %}

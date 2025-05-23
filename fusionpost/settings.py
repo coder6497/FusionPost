@@ -32,16 +32,18 @@ ALLOWED_HOSTS = ['coder6497-fusionpost-a79d.twc1.net', 'fusionpost.ru', '85.193.
 # Application definition
 
 INSTALLED_APPS = [
+    'blogs.apps.BlogsConfig',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blogs.apps.BlogsConfig',
-    'django.contrib.admin',
     'crispy_forms',
     'crispy_bootstrap5',
-    'django.contrib.postgres'
+    'django.contrib.postgres',
+    'storages',
+    'django_cleanup.apps.CleanupConfig'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -143,16 +145,10 @@ AUTH_USER_MODEL = 'blogs.CustomUser'
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_ENDPOINT_URL = "https://s3.twcstorage.ru"
+AWS_S3_ENDPOINT_URL = "http://localhost:9001"
 AWS_S3_USE_SSL = False
 AWS_DEFAULT_ACL = "public-read"
-AWS_S3_REGION_NAME = 'ru-1'
 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/"
 # MEDIA_ROOT = BASE_DIR / 'media'
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://coder6497-fusionpost-a79d.twc1.net",
-    "https://fusionpost.ru"  # Основной домен
-]
