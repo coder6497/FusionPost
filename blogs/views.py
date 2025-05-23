@@ -6,9 +6,13 @@ from .forms import RegistrationForm, TextPostForm, EditUserForm, CommentForm
 from .models import TextPost, CustomUser, Comment, PhotoForGallery
 from .parameters import get_params_for_createobject, get_params_for_getobject
 from django.db.models import Q
+from django.http import Http404
 
 def index(request):
-    post_list = TextPost.objects.filter(private=False)
+    if request.user.is_authenticated:
+        post_list = TextPost.objects.filter(Q(private=False) | Q(author=request.user))
+    else:
+        post_list = TextPost.objects.filter(private=False)
     paginator = Paginator(post_list, 10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -65,7 +69,14 @@ def delete_post(request, post_id, post_type):
 
 def post_detail(request, post_id, post_type):
     post_params = get_params_for_getobject()
-    post = post_params[post_type].objects.get(Q(id=post_id) & Q(author=request.user))
+    post = post_params[post_type].objects.get(id=post_id)
+
+    is_unauthorized = post.author != request.user
+    is_private_text = post_type == 'text_post' and post.private
+    is_photo_gallery = post_type == 'photo_gallery'
+    if is_unauthorized and (is_private_text or is_photo_gallery):
+            raise Http404("Запись не найдена или недоступна")
+    
     comments, comment_form = None, None
     if post_type == "text_post":
         comments = Comment.objects.filter(post=post)
@@ -88,7 +99,7 @@ def edit_post(request, post_id):
         edit_form = TextPostForm(request.POST, request.FILES, instance=text_post)
         if edit_form.is_valid():
             edit_form.save()
-            return redirect('blogs:text_post_detail', text_post_id=text_post.id)
+            return redirect('blogs:post_detail', post_id=text_post.id, post_type="text_post")
     else:
         edit_form = TextPostForm(instance=text_post)
     return render(request, 'posts/edit_post.html', {'text_post': text_post, 'edit_form': edit_form})
