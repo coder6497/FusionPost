@@ -14,7 +14,7 @@
     <br>
     {% if query %}
         {% for post in result %}
-            <h4><a href="{% url "blogs:text_post_detail" post.id %}">{{forloop.counter}}. {{ post }} от {{ post.author }}</a></h4>
+            <h4><a href="{% url "blogs:post_detail" post.id "text_post" %}">{{forloop.counter}}. {{ post }} от {{ post.author }}</a></h4>
             {{ post.body|truncatewords:30 }}
             <br><br>
             --------------------------------------------------------------------------------------------------

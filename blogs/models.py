@@ -31,7 +31,7 @@ class CustomUser(AbstractUser):
 
 class Comment(models.Model):
     post = models.ForeignKey(TextPost, on_delete=models.CASCADE, related_name='blog_text_comment')
-    author = models.CharField(max_length=10)
+    author = models.CharField()
     title = models.CharField(max_length=100)
     body = models.CharField()
     publish = models.DateTimeField(default=timezone.now)

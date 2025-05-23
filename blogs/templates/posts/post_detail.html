@@ -30,6 +30,10 @@
             {% endif %}
         </ul>
     </div>
+    <br><br>
+    {% if post_type == "photo_gallery" %}
+        <a href="{% url "blogs:delete_post" post.id post_type %}" class="btn btn-danger">Удалить пост</a>
+    {% endif %}
     <br><br><br><br><br>
     <br><br><br><br><br>
     {% if post_type == "text_post" %}

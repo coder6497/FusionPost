@@ -49,3 +49,6 @@ class PhotoForGalleryForm(forms.ModelForm):
         model = PhotoForGallery
         fields = ['image']
         labels = {'image': 'Загрузить фотографию 📷'}
+
+class SearchForm(forms.Form):
+    query = forms.CharField()

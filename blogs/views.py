@@ -4,10 +4,16 @@ from django.contrib.auth import login
 from django.core.paginator import Paginator
 from django.contrib.postgres.search import SearchVector
 from .forms import RegistrationForm, TextPostForm, EditUserForm, CommentForm, SearchForm
-from .models import TextPost, CustomUser, Comment
+from .models import TextPost, CustomUser, Comment, PhotoForGallery
+from .parameters import get_params_for_createobject, get_params_for_getobject
+from django.http import Http404
+from django.db.models import Q
 
 def index(request):
-    post_list = TextPost.objects.filter(private=False)
+    if request.user.is_authenticated:
+        post_list = TextPost.objects.filter(Q(private=False) | Q(author=request.user))
+    else:
+        post_list = TextPost.objects.filter(private=False)
     paginator = Paginator(post_list, 10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -60,7 +66,11 @@ def post_list(request):
 def delete_post(request, post_id, post_type):
     post_params = get_params_for_getobject()
     post_params[post_type].objects.filter(id=post_id).delete()
-    return redirect('blogs:post_list')
+    match post_type:
+        case "text_post":
+            return redirect('blogs:post_list')
+        case "photo_gallery":
+            return redirect('blogs:create_post', post_type=post_type)
 
 def post_detail(request, post_id, post_type):
     post_params = get_params_for_getobject()
@@ -124,5 +134,9 @@ def search_posts(request):
         if form.is_valid():
             search_vector = SearchVector('title', 'body', config='russian')
             query = form.cleaned_data['query']
-            result = TextPost.objects.annotate(search=search_vector).filter(search=query)
+            if request.user.is_authenticated:
+                result = TextPost.objects.annotate(search=search_vector
+                                                   ).filter(Q(search=query) & (Q(author=request.user) | Q(private=False)))
+            else:
+                result = TextPost.objects.annotate(search=search_vector).filter(Q(search=query) & Q(private=False))
     return render(request, 'posts/post_search.html', {'result': result, 'query': query, 'form': form})
