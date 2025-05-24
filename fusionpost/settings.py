@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-j4c02t+=e&$tvq1r3l$_at%5efq7qe$)nh+om0_tu3*+e*tipd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG")
+DEBUG = False
 
 ALLOWED_HOSTS = ['coder6497-fusionpost-a79d.twc1.net', 'fusionpost.ru', '85.193.86.191']
 
