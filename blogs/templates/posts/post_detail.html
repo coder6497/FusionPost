@@ -14,9 +14,9 @@
     {% endif %}
     <br><br>
     {% if post.body %}
-        <div class="border border-black rounded-3" style="font-size:  large;">
-            <pre>{{ post.body }}</pre>
-        </div>
+            <div class="border border-black rounded-3">
+                <pre>{{ post.body }}</pre>
+            </div>
     {% endif %}
     <br><br>
     <div class="alert alert-info" role="alert">
@@ -42,7 +42,7 @@
                 {% for comment in comments %}
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
-                        <div class="fw-bold">Коментарий  {{ forloop.counter }} {{ comment.title }} от {{comment.author}}</div>
+                        <div class="fw-bold">{{ comment.title }} от {{comment.author}}</div>
                         {{ comment.body }}
                     </div>
                     <span class="badge text-bg-primary rounded-pill">{{ comment.publish }}</span>
@@ -56,12 +56,16 @@
         {% endif %}
         <br><br><br>
         {% if request.user.is_authenticated %}
-        <h3>Оставить коментарий</h3>
-        <form action="{% url "blogs:post_detail" post.id post_type %}" method="post">
-            {% csrf_token %}
-            {{ comment_form|crispy }}
-            <input type="submit" class="btn btn btn-success" value="Оставить коментарий">
-        </form>
+            <h3>Оставить коментарий</h3>
+            <form action="{% url "blogs:post_detail" post.id post_type %}" method="post">
+                {% csrf_token %}
+                {{ comment_form|crispy }}
+                <input type="submit" class="btn btn btn-success" value="Оставить коментарий">
+            </form>
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                Чтобы оставить коментарий, пожалуйста зарегестрируйтесь
+            </div>
         {% endif %}
     {% endif %}
 {% endblock %}
