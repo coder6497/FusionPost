@@ -7,7 +7,13 @@ from django.core.validators import FileExtensionValidator
 
 class TextPost(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='blog_text_posts')
-    image = models.FileField(blank=True, storage=S3Boto3Storage(), upload_to='posts/%Y/%m/%d/')
+    image = models.FileField(blank=True,
+                            storage=S3Boto3Storage(),
+                            upload_to='posts/%Y/%m/%d/',
+                            validators=[
+                                    FileExtensionValidator(allowed_extensions=['png', 'jpg', 'bmp', 'jpeg'])
+                                ]
+                            )
     title = models.CharField(max_length=50)
     body = models.CharField(blank=True)
     publish = models.DateTimeField(default=timezone.now)
@@ -23,7 +29,13 @@ class TextPost(models.Model):
 
 class CustomUser(AbstractUser):
     phone = models.CharField(max_length=20)
-    avatar = models.FileField(storage=S3Boto3Storage(), upload_to='users/%Y/%m/%d/', blank=True)
+    avatar = models.FileField(storage=S3Boto3Storage(),
+                              upload_to='users/%Y/%m/%d/',
+                              blank=True,
+                                validators=[
+                                    FileExtensionValidator(allowed_extensions=['png', 'jpg', 'bmp', 'jpeg'])
+                                ]
+                            )
 
     def __str__(self):
         return self.username
