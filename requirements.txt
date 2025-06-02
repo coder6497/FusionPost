@@ -8,3 +8,4 @@ tzdata
 boto3
 django-storages
 django-cleanup
+whitenoise
