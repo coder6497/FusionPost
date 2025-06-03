@@ -5,9 +5,10 @@ from django.core.paginator import Paginator
 from django.contrib.postgres.search import SearchVector
 from .forms import RegistrationForm, TextPostForm, EditUserForm, CommentForm, SearchForm
 from .models import TextPost, CustomUser, Comment, PhotoForGallery
-from .parameters import get_params_for_createobject, get_params_for_getobject
+from .parameters import get_params_for_createobject, get_params_for_getobject, check_content_type_for_template
 from django.http import Http404
 from django.db.models import Q
+import os
 
 def index(request):
     if request.user.is_authenticated:
@@ -82,7 +83,6 @@ def post_detail(request, post_id, post_type):
     if is_unauthorized and (is_private_text or is_photo_gallery):
             raise Http404("Запись не найдена или недоступна")
     
-    comments, comment_form = None, None
     if post_type == "text_post":
         comments = Comment.objects.filter(post=post)
         if request.method == 'POST':
@@ -94,7 +94,9 @@ def post_detail(request, post_id, post_type):
                 comment.save()
         else:
             comment_form = CommentForm()
-    params = {"post": post, "comments": comments, "comment_form": comment_form, "post_type": post_type}
+
+    content_type = check_content_type_for_template(os.path.splitext(post.image.name)[-1])
+    params = {"post": post, "comments": comments, "comment_form": comment_form, "post_type": post_type, 'content_type': content_type}
     return render(request, 'posts/post_detail.html', params)
 
 @login_required

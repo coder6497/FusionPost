@@ -8,9 +8,15 @@
     <h1>{{ post.title }}</h1>
     <br><br>
     {% if post.image %}
-        <dev class="border border-primary border2">
+        {% if content_type.is_image %}
             <img src="{{ post.image.url }}" width="500">
-        </dev>
+        {% elif content_type.is_video %}
+            <video src="{{ post.image.url }}" width="450" controls></video>
+        {% elif content_type.is_audio %}
+            <audio src="{{ post.image.url }}" controls></audio>
+        {% else %}
+            <a href="{{ post.image.url }}" download>Скачать {% image_name_without_path post.id post_type %}</a>
+        {% endif %}
     {% endif %}
     <br><br>
     {% if post.body %}
@@ -26,7 +32,9 @@
             {% if post.image %}
                 <li>Название файла: {% image_name_without_path post.id post_type %}</li>
                 <li>Размер файла: {% get_image_size_in_megabytes post.id post_type %} МБ</li>
-                <li>Размер изображения: {% get_image_width_height post.id post_type %}</li>
+                {% if content_type.is_image %}
+                    <li>Размер изображения: {% get_image_width_height post.id post_type %}</li>
+                {% endif %}
             {% endif %}
         </ul>
     </div>
