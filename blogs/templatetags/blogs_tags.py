@@ -25,7 +25,7 @@ def get_image_width_height(post_id, post_type):
 def get_content_type(file_field):
     ext =  os.path.splitext(file_field)[-1]
     return {
-            'is_image': ext in ['.jpg', '.png', 'jpeg', '.bmp', '.PNG', '.JPG', '.JPEG', '.BMP'],
+            'is_image': ext in ['.jpg', '.png', '.jpeg', '.bmp', '.PNG', '.JPG', '.JPEG', '.BMP'],
             'is_video': ext in ['.mp4', '.mov', '.mkv', '.avi'],
             'is_audio': ext in ['.mp3', '.aac', '.wav']
     }
