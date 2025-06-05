@@ -8,6 +8,7 @@
     <h1>{{ post.title }}</h1>
     <br><br>
     {% if post.image %}
+        {% get_content_type post.image.name as content_type %}
         {% if content_type.is_image %}
             <img src="{{ post.image.url }}" width="500">
         {% elif content_type.is_video %}

@@ -19,11 +19,3 @@ def get_params_for_createobject(request_post, request_files):
 
 def get_params_for_getobject():
     return {"text_post": TextPost, "photo_gallery": PhotoForGallery}
-
-def check_content_type_for_template(file_ext):
-    return {
-            'is_image': file_ext in ['.jpg', '.png', 'jpeg', '.bmp'],
-            'is_video': file_ext in ['.mp4', '.mov', '.mkv', '.avi'],
-            'is_audio': file_ext in ['.mp3', '.aac', '.wav']
-    }
-

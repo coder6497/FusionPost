@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load blogs_tags %}
+{% load static %}
 
 {% block title %}{{ header }}{% endblock %}
 
@@ -24,9 +26,17 @@
         </style>
         {% for photo in photos %}
             <div class="col">
-                <a href="{% url "blogs:post_detail" photo.id "photo_gallery" %}">
-                    <div class="p-3"><img src="{{ photo.image.url }}" width="300"></div>
-                </a>
+                {% get_content_type photo.image.name as content_type %}
+                {% if content_type.is_image %}
+                    <a href="{% url "blogs:post_detail" photo.id "photo_gallery" %}">
+                        <div class="p-3"><img src="{{ photo.image.url }}" width="300"></div>
+                    </a>
+                {% endif %}
+                {% if content_type.is_video %}
+                    <a href="{% url "blogs:post_detail" photo.id "photo_gallery" %}">
+                        <div class="p-3"><img src="{% static 'images/thumbnail.png' %}" width="300"></div>
+                    </a>
+                {% endif %}
             </div>
         {% endfor %}
     </div>
