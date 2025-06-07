@@ -23,7 +23,7 @@ def get_image_width_height(post_id, post_type):
 
 @register.simple_tag
 def get_content_type(file_field):
-    ext =  os.path.splitext(file_field)[-1]
+    ext = os.path.splitext(file_field)[-1]
     return {
             'is_image': ext in ['.jpg', '.png', '.jpeg', '.bmp', '.PNG', '.JPG', '.JPEG', '.BMP'],
             'is_video': ext in ['.mp4', '.mov', '.mkv', '.avi'],
