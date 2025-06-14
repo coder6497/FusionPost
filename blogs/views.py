@@ -8,7 +8,6 @@ from .models import TextPost, CustomUser, Comment, PhotoForGallery
 from .parameters import get_params_for_createobject, get_params_for_getobject
 from django.http import Http404
 from django.db.models import Q
-import os
 
 def index(request):
     if request.user.is_authenticated:
@@ -141,3 +140,5 @@ def search_posts(request):
             else:
                 result = TextPost.objects.annotate(search=search_vector).filter(Q(search=query) & Q(private=False))
     return render(request, 'posts/post_search.html', {'result': result, 'query': query, 'form': form})
+
+ 
