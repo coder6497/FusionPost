@@ -31,8 +31,8 @@
         </li>
       </ol>
       <br>
-      <span class="badge text-bg-primary rounded-pill">Подписчики: {{ followers.count }}</span>
-      <span class="badge text-bg-primary rounded-pill">Подписки: {{ following.count }}</span>
+      <a href="{% url "blogs:followers_list" "follower" %}" class="badge text-bg-primary rounded-pill">Подписчики: {{ followers.count }}</a>
+      <a href="{% url "blogs:followers_list" "follow" %}" class="badge text-bg-primary rounded-pill">Подписки: {{ following.count }}</a>
       <br><br>
       <a href="{% url "blogs:edit_user" %}" class="btn btn-warning">Редактировать профиль</a>
 {% endblock %}

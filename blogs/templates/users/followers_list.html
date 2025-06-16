@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Ваши подписки{% endblock %}
+
+{% block body %}
+    {% if follow_type == "follow" %}
+        <h1>Ваши подписки</h1>
+    {% elif follow_type == "follower" %}
+        <h1>Ваши подписчики</h1>
+    {% endif %}
+    <br>
+    {% for follower in followers %}
+        <div class="card" style="width: 18rem;">
+            {% if follower.avatar %}
+                <img src="{{follower.avatar.url}}" class="card-img-top" alt="...">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{follower.username}}</h5>
+                <a href="{% url "blogs:user_profile" follower.id %}" class="btn btn-primary">Перейти в профиль</a>
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+{% endblock %}

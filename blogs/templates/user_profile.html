@@ -3,6 +3,7 @@
 {% block title %}{{user.username}}{% endblock %}
 
 {% block body %}
+    <br><br>
     {% if user.avatar %}
       <div class="border border-success border-2" style="float: left;">
           <img src="{{user.avatar.url}}"  width="200" >
@@ -29,10 +30,12 @@
           </div>
         </li>
       </ol>
+      <br>
+      <span class="badge text-bg-primary rounded-pill">Подписчики: {{ followers.count }}</span>
       <br><br>
       {% if not is_followed %}
-          <a href="{% url "blogs:follow_to_user" user.id %}" class="btn btn-danger">Подписаться</a>
+          <a href="{% url "blogs:follow_action" user.id "follow" %}" class="btn btn-danger">Подписаться</a>
       {% else %}
-          <a href="{% url "blogs:unfollow_user" user.id %}" class="btn btn-info">Отписаться</a>
+          <a href="{% url "blogs:follow_action" user.id "unfollow" %}" class="btn btn-info">Отписаться</a>
       {% endif %}
 {% endblock %}

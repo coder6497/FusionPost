@@ -150,18 +150,27 @@ def user_profile(request, user_id):
     selected_user = CustomUser.objects.get(id=user_id)
     if request.user != selected_user:
         is_followed = False
-        if selected_user in request.user.following.all():
-            is_followed = True
-        return render(request, 'user_profile.html', {"user": CustomUser.objects.get(id=user_id), 'is_followed': is_followed})
+        if request.user.is_authenticated:
+            if selected_user in request.user.following.all():
+                is_followed = True
+        return render(request, 'user_profile.html', {"user": selected_user, 'is_followed': is_followed, 'followers': selected_user.followers.all()})
     else:
         return redirect('blogs:about_user')
 
 @login_required
-def follow_to_user(request, user_id):
-    request.user.following.add(CustomUser.objects.get(id=user_id))
+def follow_action(request, user_id, action):
+    match action:
+        case 'follow':
+            request.user.following.add(CustomUser.objects.get(id=user_id))
+        case 'unfollow':
+            request.user.following.remove(CustomUser.objects.get(id=user_id))
     return redirect('blogs:user_profile', user_id=user_id)
 
 @login_required
-def unfollow_user(request, user_id):
-    request.user.following.remove(CustomUser.objects.get(id=user_id))
-    return redirect('blogs:user_profile', user_id=user_id)
+def followers_list(request, follow_type):
+    match follow_type:
+        case "follow":
+            followers = request.user.following.all()
+        case "follower":
+            followers = request.user.followers.all()
+    return render(request, 'users/followers_list.html', {'followers': followers, 'follow_type': follow_type})
