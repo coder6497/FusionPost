@@ -37,6 +37,11 @@
                     <li>Размер изображения: {% get_image_width_height post.id post_type %}</li>
                 {% endif %}
             {% endif %}
+            {% if post.private %}
+               <li>Статус: Приватный</li>
+            {% else %}
+                <li>Статус: Публичный</li>
+            {% endif %}
         </ul>
     </div>
     <br><br>

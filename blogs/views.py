@@ -148,12 +148,18 @@ def search_posts(request):
 
 def user_profile(request, user_id):
     selected_user = CustomUser.objects.get(id=user_id)
+    post_list_for_user = TextPost.objects.filter(Q(author=selected_user) & Q(private=False))
     if request.user != selected_user:
         is_followed = False
         if request.user.is_authenticated:
             if selected_user in request.user.following.all():
                 is_followed = True
-        return render(request, 'user_profile.html', {"user": selected_user, 'is_followed': is_followed, 'followers': selected_user.followers.all()})
+        params = {"user": selected_user,
+                  'is_followed': is_followed,
+                  'followers': selected_user.followers.all(),
+                  'post_list': post_list_for_user
+                  }
+        return render(request, 'user_profile.html', params)
     else:
         return redirect('blogs:about_user')
 

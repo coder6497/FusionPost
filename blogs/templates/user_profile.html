@@ -38,4 +38,16 @@
       {% else %}
           <a href="{% url "blogs:follow_action" user.id "unfollow" %}" class="btn btn-info">Отписаться</a>
       {% endif %}
+      <br><br><br>
+      <h3>Посты от {{user.username}}</h3>
+      <div class="list-group">
+        {% for post in post_list %}
+            <a href="{% url "blogs:post_detail" post.id "text_post" %}" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ post.title }}</h5>
+                </div>
+                <p class="mb-1">{{ post.body|truncatewords:30 }}</p>
+            </a>
+        {% endfor %}
+      </div>
 {% endblock %}
