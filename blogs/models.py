@@ -33,6 +33,7 @@ class CustomUser(AbstractUser):
                                     FileExtensionValidator(allowed_extensions=['png', 'jpg', 'bmp', 'jpeg'])
                                 ]
                             )
+    following = models.ManyToManyField('self', related_name='followers', symmetrical=False, blank=True)
 
     def __str__(self):
         return self.username
@@ -64,3 +65,7 @@ class PhotoForGallery(models.Model):
         )
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='photos_from_gallery')
     publish = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-publish']
+        indexes = [models.Index(fields=['-publish'])]

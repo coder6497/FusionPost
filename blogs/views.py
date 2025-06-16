@@ -110,8 +110,12 @@ def edit_post(request, post_id):
     return render(request, 'posts/edit_post.html', {'text_post': text_post, 'edit_form': edit_form})
 
 @login_required
-def about_user(request): 
-    return render(request, 'about_user.html', {"user": CustomUser.objects.get(id=request.user.id)})
+def about_user(request):
+    params = {"user": CustomUser.objects.get(id=request.user.id),
+              'followers': request.user.followers.all(),
+              'following': request.user.following.all()
+             }
+    return render(request, 'about_user.html', params)
 
 @login_required
 def edit_user(request):
@@ -141,4 +145,23 @@ def search_posts(request):
                 result = TextPost.objects.annotate(search=search_vector).filter(Q(search=query) & Q(private=False))
     return render(request, 'posts/post_search.html', {'result': result, 'query': query, 'form': form})
 
- 
+
+def user_profile(request, user_id):
+    selected_user = CustomUser.objects.get(id=user_id)
+    if request.user != selected_user:
+        is_followed = False
+        if selected_user in request.user.following.all():
+            is_followed = True
+        return render(request, 'user_profile.html', {"user": CustomUser.objects.get(id=user_id), 'is_followed': is_followed})
+    else:
+        return redirect('blogs:about_user')
+
+@login_required
+def follow_to_user(request, user_id):
+    request.user.following.add(CustomUser.objects.get(id=user_id))
+    return redirect('blogs:user_profile', user_id=user_id)
+
+@login_required
+def unfollow_user(request, user_id):
+    request.user.following.remove(CustomUser.objects.get(id=user_id))
+    return redirect('blogs:user_profile', user_id=user_id)
