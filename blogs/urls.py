@@ -1,15 +1,16 @@
 from django.urls import path, reverse_lazy
 from . import views
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
+from blogs.forms import CustomLoginForm, CustomPasswordChangeForm
 
 app_name = 'blogs'
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('login/', LoginView.as_view(), name='login'),
+    path('login/', LoginView.as_view(form_class=CustomLoginForm), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('password_change_done/', PasswordChangeDoneView.as_view(), name='password_change_done'),
-    path('password_change/', PasswordChangeView.as_view(success_url=reverse_lazy('blogs:password_change_done')), name='password_change'),
+    path('password_change/', PasswordChangeView.as_view(success_url=reverse_lazy('blogs:password_change_done'), form_class=CustomPasswordChangeForm), name='password_change'),
     path('register/', views.register, name='register'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('create_post/<str:post_type>', views.create_post, name='create_post'),
