@@ -1,27 +1,48 @@
 from django.urls import path, reverse_lazy
 from . import views
-from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
-from blogs.forms import CustomLoginForm, CustomPasswordChangeForm
+from django.contrib.auth.views import (LoginView,
+                                        LogoutView,
+                                        PasswordChangeView,
+                                        PasswordChangeDoneView,
+                                        PasswordResetView,
+                                        PasswordResetDoneView,
+                                        PasswordResetConfirmView,
+                                        PasswordResetCompleteView
+                                    )
+from blogs.forms import CustomLoginForm, CustomPasswordChangeForm, CustomPasswordResetForm
 
 app_name = 'blogs'
 
 urlpatterns = [
     path('', views.index, name="index"),
+
     path('login/', LoginView.as_view(form_class=CustomLoginForm), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('register/', views.register, name='register'),
+
     path('password_change_done/', PasswordChangeDoneView.as_view(), name='password_change_done'),
     path('password_change/', PasswordChangeView.as_view(success_url=reverse_lazy('blogs:password_change_done'), form_class=CustomPasswordChangeForm), name='password_change'),
-    path('register/', views.register, name='register'),
+
+    path('password-reset', PasswordResetView.as_view(success_url=reverse_lazy('blogs:password_reset_done')), name='password_reset'),
+    path('password-reset_done', PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('password-reset/<uidb64>/<token>', PasswordResetConfirmView.as_view(success_url=reverse_lazy('blogs:password_reset_complete'), form_class=CustomPasswordResetForm), name='password_reset_confirm'),
+    path('password-reset-complete', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+
     path('dashboard/', views.dashboard, name='dashboard'),
+
     path('create_post/<str:post_type>', views.create_post, name='create_post'),
     path('post_list/', views.post_list, name='post_list'),
     path('post_detail/<int:post_id>/<str:post_type>', views.post_detail, name='post_detail'),
     path('delete_post/<int:post_id>/<str:post_type>', views.delete_post, name='delete_post'),
+
     path('about_user/', views.about_user, name='about_user'),
     path('edit_user/', views.edit_user, name='edit_user'),
     path('edit_post/<int:post_id>', views.edit_post, name='edit_post'),
+
     path('post_search/', views.search_posts, name='post_search'),
+
     path('user_profile/<int:user_id>', views.user_profile, name='user_profile'),
+
     path('follow_action/<int:user_id>/<str:action>', views.follow_action, name='follow_action'),
     path('followers_list/<str:follow_type>', views.followers_list, name='followers_list')
 ]

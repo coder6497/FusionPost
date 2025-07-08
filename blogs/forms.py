@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, SetPasswordForm
 from .models import TextPost, CustomUser, Comment, PhotoForGallery
 
 
@@ -17,6 +17,11 @@ class CustomPasswordChangeForm(PasswordChangeForm):
                       "password_too_short": "Пароль слишком короткий",
                       "password_common": "Пароль слишком простой"
                     }
+
+class CustomPasswordResetForm(SetPasswordForm):
+    new_password1 = forms.CharField(label='Новый пароль', widget=forms.PasswordInput())
+    new_password2 = forms.CharField(label='Повторите пароль', widget=forms.PasswordInput())
+    error_messages = {"password_mismatch": "Новые пароли не совпадают"}
 
 
 class RegistrationForm(UserCreationForm):
