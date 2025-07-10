@@ -11,9 +11,9 @@ from django.db.models import Q
 
 def index(request):
     if request.user.is_authenticated:
-        post_list = TextPost.objects.filter(Q(private=False) | Q(author=request.user))
+        post_list = TextPost.objects.filter(Q(private=False) | Q(author=request.user)).select_related('author')
     else:
-        post_list = TextPost.objects.filter(private=False)
+        post_list = TextPost.objects.filter(private=False).select_related('author')
     paginator = Paginator(post_list, 10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -59,7 +59,7 @@ def create_post(request, post_type):
 
 @login_required
 def post_list(request):
-    return render(request, 'posts/post_list.html', {"posts": TextPost.objects.filter(author=request.user)})
+    return render(request, 'posts/post_list.html', {"posts": TextPost.objects.filter(author=request.user).select_related('author')})
 
 @login_required
 def delete_post(request, post_id, post_type):
@@ -148,7 +148,7 @@ def search_posts(request):
 
 def user_profile(request, user_id):
     selected_user = CustomUser.objects.get(id=user_id)
-    post_list_for_user = TextPost.objects.filter(Q(author=selected_user) & Q(private=False))
+    post_list_for_user = TextPost.objects.filter(Q(author=selected_user) & Q(private=False)).select_related("author")
     if request.user != selected_user:
         is_followed = False
         if request.user.is_authenticated:
