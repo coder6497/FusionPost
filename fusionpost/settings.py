@@ -132,8 +132,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-# STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
-STATIC_ROOT = '/app/public'
+STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = '/app/public'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -157,7 +157,7 @@ AWS_S3_REGION_NAME = "ru-1"
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/"
-# MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 CSRF_TRUSTED_ORIGINS = ['https://coder6497-fusionpost-a79d.twc1.net', 'https://fusionpost.ru']

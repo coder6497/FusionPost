@@ -4,12 +4,20 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from storages.backends.s3boto3 import S3Boto3Storage
 from django.core.validators import FileExtensionValidator
+from django.core.exceptions import ValidationError
+
+
+def check_filesize(value):
+    max_size = 500 * 1024 ** 2
+    if value.size > max_size:
+        raise ValidationError(f"Размер файла превышает {max_size // 1024 ** 2} МБ")
 
 class TextPost(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='blog_text_posts')
     image = models.FileField(blank=True,
                             storage=S3Boto3Storage(),
-                            upload_to='posts/%Y/%m/%d/'
+                            upload_to='posts/%Y/%m/%d/',
+                            validators=[check_filesize]
                             )
     title = models.CharField(max_length=50)
     body = models.CharField(blank=True)
@@ -60,7 +68,8 @@ class PhotoForGallery(models.Model):
         storage=S3Boto3Storage(),
         upload_to='gallery/%Y/%m/%d/',
         validators=[
-            FileExtensionValidator(allowed_extensions=['png', 'jpg', 'bmp', 'jpeg', 'mp4', 'mov', 'mkv', 'avi'])
+            FileExtensionValidator(allowed_extensions=['png', 'jpg', 'bmp', 'jpeg', 'mp4', 'mov', 'mkv', 'avi']),
+            check_filesize
             ]
         )
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='photos_from_gallery')
