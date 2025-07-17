@@ -8,10 +8,11 @@ from .models import TextPost, CustomUser, Comment, PhotoForGallery
 from .parameters import get_params_for_createobject, get_params_for_getobject
 from django.http import Http404
 from django.db.models import Q
-from rest_framework import generics
+from rest_framework.views import APIView
 from blogs.api.serializers import TextPostSerializer
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.response import Response
+from rest_framework import status
 
 
 def index(request):
@@ -187,8 +188,9 @@ def followers_list(request, follow_type):
     return render(request, 'users/followers_list.html', {'followers': followers, 'follow_type': follow_type})
 
 
-class TextPostListView(generics.ListAPIView):
+class TextPostListView(APIView):
     authentication_classes = [BasicAuthentication]
+
     def get_queryset(self):
         if self.request.user.is_authenticated:
             return TextPost.objects.filter(Q(author=self.request.user) | Q(private=False)).select_related('author')
@@ -198,3 +200,47 @@ class TextPostListView(generics.ListAPIView):
         posts = self.get_queryset()
         serializer = TextPostSerializer(posts, many=True)
         return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = TextPostSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(author=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TextPostDetailView(APIView):
+    authentication_classes = [BasicAuthentication]
+
+    def get_queryset(self):
+        return TextPost.objects.all()
+
+    def get_object(self, post_id):
+        try:
+            return self.get_queryset().get(pk=post_id)
+        except TextPost.DoesNotExist:
+            return None
+
+    def get(self, request, post_id):
+        post = self.get_object(post_id)
+        if post is None:
+            return Response({"error": "Пост не найден"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = TextPostSerializer(post)
+        return Response(serializer.data)
+    
+    def delete(self, request, post_id):
+        post = self.get_object(post_id)
+        if post is None:
+            return Response({"error": "Пост не найден"}, status=status.HTTP_404_NOT_FOUND)
+        post.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    def patch(self, request, post_id):
+        post = self.get_object(post_id)
+        if post is None:
+            return Response({"error": "Пост не найден"})
+        serializer = TextPostSerializer(post, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

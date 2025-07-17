@@ -5,3 +5,4 @@ class TextPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = TextPost
         fields = ['id', 'author', 'title', 'body', 'publish', 'private']
+        read_only_fields = ['author']
