@@ -8,6 +8,11 @@ from .models import TextPost, CustomUser, Comment, PhotoForGallery
 from .parameters import get_params_for_createobject, get_params_for_getobject
 from django.http import Http404
 from django.db.models import Q
+from rest_framework import generics
+from blogs.api.serializers import TextPostSerializer
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.response import Response
+
 
 def index(request):
     if request.user.is_authenticated:
@@ -180,3 +185,16 @@ def followers_list(request, follow_type):
         case "follower":
             followers = request.user.followers.all()
     return render(request, 'users/followers_list.html', {'followers': followers, 'follow_type': follow_type})
+
+
+class TextPostListView(generics.ListAPIView):
+    authentication_classes = [BasicAuthentication]
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return TextPost.objects.filter(Q(author=self.request.user) | Q(private=False)).select_related('author')
+        return TextPost.objects.filter(private=False).select_related('author')
+
+    def get(self, request):
+        posts = self.get_queryset()
+        serializer = TextPostSerializer(posts, many=True)
+        return Response(serializer.data)
